@@ -10,49 +10,49 @@ export const metadata: Metadata = {
 const serviceDetails = [
   {
     num: "01", title: "Web & App Development", color: "#ff5722",
-    icon: "⌨️",
+    image: "/images/hero.png",
     description: "We craft high-performance websites and mobile applications tailored to your business goals. From landing pages to complex enterprise platforms, we deliver pixel-perfect, scalable solutions using the latest technologies.",
     features: ["Custom Website Design & Development", "Mobile App Development (iOS & Android)", "E-Commerce Platforms", "CMS Integration", "API Development & Integration", "Performance Optimization & SEO"],
   },
   {
     num: "02", title: "Interior Design", color: "#0a1128",
-    icon: "🏠",
+    image: "/images/about2.png",
     description: "We create stunning, functional environments that reflect your brand identity. Our interior design team blends aesthetics with practicality to transform any space into an inspiring experience.",
     features: ["Commercial Space Design", "Office & Retail Design", "3D Visualization & Rendering", "Space Planning", "Material & Furniture Selection", "Project Management"],
   },
   {
     num: "03", title: "Animations", color: "#ff5722",
-    icon: "✨",
+    image: "/images/port1.png",
     description: "From explainer videos to full brand motion campaigns, our animation team produces visually stunning 2D and 3D animations that engage your audience and communicate your message powerfully.",
     features: ["2D & 3D Animation", "Motion Graphics", "Explainer Videos", "Product Animations", "Logo Animations", "Social Media Reels & Stories"],
   },
   {
     num: "04", title: "Social Media Management", color: "#0a1128",
-    icon: "📱",
+    image: "/images/port2.png",
     description: "We manage your brand's entire social media presence — from content creation and scheduling to community engagement and paid advertising — so you can focus on running your business.",
     features: ["Content Strategy & Planning", "Graphic Design & Copywriting", "Community Management", "Paid Advertising Campaigns", "Analytics & Reporting", "Influencer Collaboration"],
   },
   {
     num: "05", title: "Photography & Videography", color: "#ff5722",
-    icon: "📷",
+    image: "/images/about1.png",
     description: "Our professional visual team captures your brand story through stunning photography and cinematic videography. We handle everything from product shoots to full corporate video productions.",
     features: ["Product & Commercial Photography", "Brand Storytelling Videos", "Event Coverage", "Corporate Headshots", "Real Estate Photography", "Drone Aerial Footage"],
   },
   {
     num: "06", title: "Printing", color: "#0a1128",
-    icon: "🖨️",
+    image: "/images/port3.png",
     description: "We deliver high-quality print materials that make lasting impressions. From business cards to large-format banners, our printing services ensure your physical touchpoints match your digital brand.",
     features: ["Business Cards & Stationery", "Brochures & Flyers", "Banners & Signage", "Packaging Design & Print", "Branded Merchandise", "Large Format Printing"],
   },
   {
     num: "07", title: "Branding", color: "#ff5722",
-    icon: "✦",
+    image: "/images/about2.png",
     description: "We build complete brand identities from scratch — logo design, color systems, typography, and comprehensive brand guidelines — ensuring your brand communicates the right message at every touchpoint.",
     features: ["Logo Design & Identity", "Brand Strategy & Positioning", "Brand Guidelines Manual", "Marketing Collateral Design", "Brand Refresh & Rebranding", "Packaging & Label Design"],
   },
   {
     num: "08", title: "Studio Rental", color: "#0a1128",
-    icon: "🎬",
+    image: "/images/about1.png",
     description: "Access our state-of-the-art production studio equipped with professional lighting, backdrops, and equipment for photography, videography, and content creation sessions.",
     features: ["Professional Lighting Setup", "Multiple Backdrop Options", "Photography Equipment", "Videography Rigs & Monitors", "Podcast & Interview Setup", "Flexible Half/Full Day Bookings"],
   },
@@ -98,19 +98,25 @@ export default function ServicesPage() {
               <div key={s.num}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: i % 2 === 0 ? "1fr 1.6fr" : "1.6fr 1fr",
-                  gap: 48, alignItems: "center",
+                  gridTemplateColumns: i % 2 === 0 ? "1fr 1fr" : "1fr 1fr",
+                  gap: 32, alignItems: "center",
                   background: i % 2 === 0 ? "#fff" : "linear-gradient(135deg,#fff1ed 0%,#f8f9fa 100%)",
-                  borderRadius: 24, padding: "40px 48px",
+                  borderRadius: 20, padding: "28px 36px",
                   border: "1px solid var(--border)",
                   boxShadow: "var(--shadow-sm)",
                 }}
               >
                 {/* Visual (order flips on even/odd) */}
                 {i % 2 !== 0 && (
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", order: 1 }}>
-                    <div style={{ width: 180, height: 180, background: `linear-gradient(145deg,${s.color}18,${s.color}35)`, borderRadius: 36, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "5rem", boxShadow: `0 20px 50px ${s.color}25` }}>
-                      {s.icon}
+                  <div style={{ display: "flex", alignItems: "stretch", justifyContent: "center", order: 1 }}>
+                    <div style={{ 
+                      width: "100%", 
+                      height: 220, 
+                      borderRadius: 16, 
+                      overflow: "hidden",
+                      boxShadow: `0 12px 30px ${s.color}25`
+                    }}>
+                      <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                     </div>
                   </div>
                 )}
@@ -137,9 +143,15 @@ export default function ServicesPage() {
                 </div>
 
                 {i % 2 === 0 && (
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <div style={{ width: 180, height: 180, background: `linear-gradient(145deg,${s.color}18,${s.color}35)`, borderRadius: 36, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "5rem", boxShadow: `0 20px 50px ${s.color}25` }}>
-                      {s.icon}
+                  <div style={{ display: "flex", alignItems: "stretch", justifyContent: "center" }}>
+                    <div style={{ 
+                      width: "100%", 
+                      height: 220, 
+                      borderRadius: 16, 
+                      overflow: "hidden",
+                      boxShadow: `0 12px 30px ${s.color}25`
+                    }}>
+                      <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                     </div>
                   </div>
                 )}
