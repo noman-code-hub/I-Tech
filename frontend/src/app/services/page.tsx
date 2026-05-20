@@ -106,13 +106,12 @@ export default function ServicesPage() {
                   border: "1px solid var(--border)",
                   boxShadow: "var(--shadow-sm)",
                   overflow: "hidden",
-                  maxHeight: 300,
                 }}
               >
                 {/* Visual (order flips on even/odd) */}
                 {i % 2 !== 0 && (
-                  <div style={{ order: 1, overflow: "hidden" }}>
-                    <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  <div style={{ order: 1, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+                    <img src={s.image} alt={s.title} style={{ width: "100%", height: 200, objectFit: "cover", display: "block", borderRadius: 14, boxShadow: `0 8px 24px ${s.color}25` }} />
                   </div>
                 )}
 
@@ -138,8 +137,8 @@ export default function ServicesPage() {
                 </div>
 
                 {i % 2 === 0 && (
-                  <div style={{ overflow: "hidden" }}>
-                    <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  <div style={{ overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+                    <img src={s.image} alt={s.title} style={{ width: "100%", height: 200, objectFit: "cover", display: "block", borderRadius: 14, boxShadow: `0 8px 24px ${s.color}25` }} />
                   </div>
                 )}
               </div>
