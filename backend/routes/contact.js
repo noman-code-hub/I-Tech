@@ -1,18 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const Lead = require("../models/Lead");
-const nodemailer = require("nodemailer");
+const { createTransporter, brandedWrapper, infoRow } = require("../utils/mailer");
 
-// Sanitize helper
 const sanitize = (str) =>
   typeof str === "string" ? str.replace(/<[^>]*>/g, "").trim() : "";
 
-// POST /api/contact
+// ─── POST /api/contact ────────────────────────────────────────────────────────
 router.post("/", async (req, res) => {
   try {
     const { name, email, phone, service, message } = req.body;
 
-    // Basic validation
     if (!name || !email || !message) {
       return res.status(400).json({ error: "Name, email, and message are required." });
     }
@@ -27,56 +25,92 @@ router.post("/", async (req, res) => {
       ip: req.ip,
     });
 
-    // Send email notification (if SMTP configured)
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      try {
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-          },
-        });
+    // ── Send Emails ───────────────────────────────────────────────────────────
+    const transporter = createTransporter();
+    if (transporter) {
+      const sName = sanitize(name);
+      const sEmail = sanitize(email);
+      const sService = sanitize(service || "General Inquiry");
+      const sMessage = sanitize(message);
 
-        await transporter.sendMail({
-          from: `"ITech Digitals Website" <${process.env.SMTP_USER}>`,
-          to: process.env.NOTIFY_EMAIL || "itechkw.business@gmail.com",
-          subject: `🔔 New Lead: ${sanitize(name)} — ${sanitize(service) || "General Inquiry"}`,
-          html: `
-            <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f9f9f9;border-radius:12px;overflow:hidden;">
-              <div style="background:linear-gradient(135deg,#ff5722,#e64a19);padding:28px 32px;">
-                <h2 style="color:#fff;margin:0;font-size:1.4rem;">New Contact Form Submission</h2>
-                <p style="color:rgba(255,255,255,0.8);margin:6px 0 0;font-size:0.9rem;">i-TECH Digitals Website</p>
-              </div>
-              <div style="padding:28px 32px;background:#fff;">
-                <table style="width:100%;border-collapse:collapse;">
-                  <tr><td style="padding:10px 0;font-weight:600;color:#ff5722;width:120px;">Name</td><td style="padding:10px 0;color:#333;">${sanitize(name)}</td></tr>
-                  <tr><td style="padding:10px 0;font-weight:600;color:#ff5722;">Email</td><td style="padding:10px 0;color:#333;">${sanitize(email)}</td></tr>
-                  <tr><td style="padding:10px 0;font-weight:600;color:#ff5722;">Phone</td><td style="padding:10px 0;color:#333;">${sanitize(phone) || "—"}</td></tr>
-                  <tr><td style="padding:10px 0;font-weight:600;color:#ff5722;">Service</td><td style="padding:10px 0;color:#333;">${sanitize(service) || "—"}</td></tr>
-                </table>
-                <div style="margin-top:20px;padding:20px;background:#fff1ed;border-radius:10px;border-left:4px solid #ff5722;">
-                  <div style="font-weight:600;color:#ff5722;margin-bottom:8px;">Message</div>
-                  <p style="color:#444;line-height:1.7;margin:0;">${sanitize(message)}</p>
-                </div>
-                <p style="color:#999;font-size:0.8rem;margin-top:24px;">Submitted on ${new Date().toLocaleString("en-US", { timeZone: "Asia/Kuwait" })} (Kuwait Time)</p>
-              </div>
-            </div>
-          `,
-        });
+      // 1️⃣ Admin notification
+      const adminBody = `
+        <h2 style="color:#1a237e;font-size:20px;margin:0 0 6px;">🔔 New Contact Form Submission</h2>
+        <p style="color:#666;font-size:14px;margin:0 0 24px;">Someone just filled out the contact form on the website.</p>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+          ${infoRow("Name", sName)}
+          ${infoRow("Email", `<a href="mailto:${sEmail}" style="color:#ff6b35;">${sEmail}</a>`)}
+          ${infoRow("Phone", sanitize(phone || ""))}
+          ${infoRow("Service", sService, true)}
+        </table>
+
+        <div style="margin-top:20px;padding:20px;background:#fff3e0;border-radius:10px;border-left:4px solid #ff6b35;">
+          <div style="font-weight:600;color:#ff6b35;margin-bottom:8px;font-size:14px;">Message</div>
+          <p style="color:#444;line-height:1.7;margin:0;font-size:14px;">${sMessage}</p>
+        </div>
+
+        <p style="color:#999;font-size:12px;margin-top:20px;">
+          Submitted: ${new Date().toLocaleString("en-US", { timeZone: "Asia/Kuwait" })} (Kuwait Time) · Lead ID: ${lead._id}
+        </p>`;
+
+      // 2️⃣ User auto-reply
+      const userBody = `
+        <h2 style="color:#1a237e;font-size:22px;margin:0 0 8px;">We got your message, ${sName}! ✨</h2>
+        <p style="color:#555;font-size:15px;line-height:1.7;margin:0 0 24px;">
+          Thank you for contacting <strong>i-TECH Digitals</strong>. We have received your message and our team will get back to you within <strong>24 hours</strong>.
+        </p>
+
+        <div style="background:#f9f9f9;border-radius:12px;padding:24px;margin-bottom:28px;">
+          <h3 style="color:#ff6b35;font-size:14px;margin:0 0 16px;text-transform:uppercase;letter-spacing:0.5px;">📋 Your Message Summary</h3>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+            ${infoRow("Service", sService)}
+            ${infoRow("Message", sMessage, true)}
+          </table>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#fff8f5,#fff3e0);border-radius:12px;padding:24px;margin-bottom:28px;border:1px solid #ffe0cc;">
+          <h3 style="color:#e64a19;font-size:14px;margin:0 0 10px;">📞 Can't wait? Reach us directly:</h3>
+          <p style="color:#555;font-size:14px;margin:0;line-height:1.7;">
+            <a href="mailto:itechkw.business@gmail.com" style="color:#ff6b35;font-weight:600;">itechkw.business@gmail.com</a>
+          </p>
+        </div>
+
+        <p style="color:#888;font-size:13px;line-height:1.7;margin:0;">
+          We look forward to working with you!<br>
+          <strong style="color:#1a237e;">— The i-TECH Digitals Team</strong>
+        </p>`;
+
+      try {
+        await Promise.all([
+          transporter.sendMail({
+            from: `"i-TECH Digitals Website" <${process.env.SMTP_USER}>`,
+            to: process.env.NOTIFY_EMAIL || process.env.SMTP_USER,
+            subject: `🔔 New Lead: ${sName} — ${sService}`,
+            html: brandedWrapper(adminBody),
+          }),
+          transporter.sendMail({
+            from: `"i-TECH Digitals" <${process.env.SMTP_USER}>`,
+            to: sEmail,
+            subject: `✅ We received your message — i-TECH Digitals`,
+            html: brandedWrapper(
+              userBody,
+              "You're receiving this because you contacted us on our website."
+            ),
+          }),
+        ]);
+        console.log(`✅ Contact emails sent for: ${sEmail}`);
       } catch (mailErr) {
         console.warn("⚠️  Email notification failed:", mailErr.message);
-        // Don't block the response — lead is already saved
       }
     }
 
     res.status(201).json({
       success: true,
-      message: "Thank you! Your message has been received. We will be in touch within 24 hours.",
+      message: "Thank you! Your message has been received. Check your email for confirmation.",
       leadId: lead._id,
     });
   } catch (err) {
-    // Handle Mongoose validation errors
     if (err.name === "ValidationError") {
       const errors = Object.values(err.errors).map((e) => e.message);
       return res.status(400).json({ error: errors.join(". ") });
@@ -86,7 +120,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET /api/contact — Admin: list leads (basic)
+// ─── GET /api/contact — Admin only ───────────────────────────────────────────
 router.get("/", async (req, res) => {
   try {
     const adminKey = req.headers["x-admin-key"];

@@ -154,3 +154,52 @@ h1, h2, h3, h4, h5, h6 {
   background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 30px 30px;
 }
+
+/* ── Form Focus Styles ──────────────────────────────────────── */
+
+/* Light form inputs (ContactSection) */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.15) !important;
+}
+
+/* Dark form inputs (BookingSection — dark glass cards) */
+#booking input:focus,
+#booking textarea:focus,
+#booking select:focus {
+  border-color: rgba(255, 107, 53, 0.7) !important;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.18) !important;
+  background: rgba(255, 255, 255, 0.11) !important;
+}
+
+/* Dark input placeholder color */
+#booking input::placeholder,
+#booking textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Dark input option color (select dropdown) */
+#booking select option {
+  background: #1a237e;
+  color: #ffffff;
+}
+
+/* ── Responsive: BookingSection grid ────────────────────────── */
+@media (max-width: 640px) {
+  #booking form > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+  #booking > div > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Responsive: ContactSection grid ───────────────────────── */
+@media (max-width: 768px) {
+  #contact > div > div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}

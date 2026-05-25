@@ -100,7 +100,7 @@ export default function ServicesPage() {
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
                   gap: 0,
-                  alignItems: "stretch",
+                  alignItems: "center",
                   background: i % 2 === 0 ? "#fff" : "linear-gradient(135deg,#fff1ed 0%,#f8f9fa 100%)",
                   borderRadius: 20,
                   border: "1px solid var(--border)",
@@ -110,8 +110,10 @@ export default function ServicesPage() {
               >
                 {/* Visual (order flips on even/odd) */}
                 {i % 2 !== 0 && (
-                  <div style={{ order: 1, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
-                    <img src={s.image} alt={s.title} style={{ width: "100%", height: 200, objectFit: "cover", display: "block", borderRadius: 14, boxShadow: `0 8px 24px ${s.color}25` }} />
+                  <div style={{ order: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+                    <div style={{ width: "100%", aspectRatio: "16/9", borderRadius: 14, overflow: "hidden", boxShadow: `0 8px 24px ${s.color}25` }}>
+                      <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                    </div>
                   </div>
                 )}
 
@@ -137,8 +139,10 @@ export default function ServicesPage() {
                 </div>
 
                 {i % 2 === 0 && (
-                  <div style={{ overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
-                    <img src={s.image} alt={s.title} style={{ width: "100%", height: 200, objectFit: "cover", display: "block", borderRadius: 14, boxShadow: `0 8px 24px ${s.color}25` }} />
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+                    <div style={{ width: "100%", aspectRatio: "16/9", borderRadius: 14, overflow: "hidden", boxShadow: `0 8px 24px ${s.color}25` }}>
+                      <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                    </div>
                   </div>
                 )}
               </div>

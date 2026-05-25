@@ -1,9 +1,23 @@
 "use client";
 import { useState } from "react";
+import { postJson } from "@/lib/api";
+
+const SERVICES = [
+  "Web & App Development",
+  "Branding",
+  "Social Media Management",
+  "Photography & Videography",
+  "Animations",
+  "Interior Design",
+  "Printing",
+  "Studio Rental",
+  "Other",
+];
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", service: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handle = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
@@ -11,19 +25,21 @@ export default function ContactSection() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
-      if (!res.ok) throw new Error("Failed to send message");
-      setStatus("success");
-      setForm({ name: "", email: "", phone: "", service: "", message: "" });
-    } catch (err) {
-      console.error(err);
+    setErrorMsg("");
+
+    const result = await postJson<{ success: boolean; message: string; leadId: string }>(
+      "/api/contact",
+      form
+    );
+
+    if (!result.ok) {
+      setErrorMsg(result.error);
       setStatus("error");
+      return;
     }
+
+    setStatus("success");
+    setForm({ name: "", email: "", phone: "", service: "", message: "" });
   };
 
   const inputStyle: React.CSSProperties = {
@@ -57,11 +73,22 @@ export default function ContactSection() {
               </div>
             ) : (
               <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                {status === "error" && (
+                  <div style={{ padding: "14px 18px", background: "#fef2f2", color: "#991b1b", borderRadius: 8, border: "1px solid #fecaca" }}>
+                    {errorMsg || "Something went wrong. Please try again."}
+                  </div>
+                )}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                   <input name="name" type="text" placeholder="Your Name" required value={form.name} onChange={handle} style={inputStyle} />
                   <input name="email" type="email" placeholder="Your Email" required value={form.email} onChange={handle} style={inputStyle} />
                 </div>
                 <input name="phone" type="tel" placeholder="Phone Number" value={form.phone} onChange={handle} style={inputStyle} />
+                <select name="service" value={form.service} onChange={handle} style={inputStyle}>
+                  <option value="">Select a service (optional)</option>
+                  {SERVICES.map((service) => (
+                    <option key={service} value={service}>{service}</option>
+                  ))}
+                </select>
                 <textarea name="message" placeholder="Write your message here..." required rows={5} value={form.message} onChange={handle} style={{ ...inputStyle, resize: "vertical" }} />
                 
                 <div>

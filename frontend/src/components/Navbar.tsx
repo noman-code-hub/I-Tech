@@ -22,8 +22,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setMenuOpen(false), [pathname]);
-
   const isDarkBg = !scrolled && pathname === "/";
 
   return (
@@ -75,7 +73,7 @@ export default function Navbar() {
         </nav>
 
         {/* Right CTA & Info */}
-        <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: 24 }}>
+        <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,87,34,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)" }}>
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" /></svg>
@@ -85,6 +83,36 @@ export default function Navbar() {
               <div style={{ fontSize: "0.9rem", fontWeight: 700, color: isDarkBg ? "#fff" : "var(--secondary)" }}>+965 9090 9075</div>
             </div>
           </div>
+
+          {/* Book Now CTA */}
+          <Link
+            href="/contact#booking"
+            style={{
+              background: "linear-gradient(135deg, #ff6b35, #e64a19)",
+              color: "#fff",
+              padding: "10px 22px",
+              borderRadius: 50,
+              fontWeight: 700,
+              fontSize: "0.88rem",
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 7,
+              boxShadow: "0 4px 18px rgba(255,107,53,0.35)",
+              transition: "all 0.25s ease",
+              whiteSpace: "nowrap",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
+              (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 24px rgba(255,107,53,0.5)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+              (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 18px rgba(255,107,53,0.35)";
+            }}
+          >
+            📅 Book Now
+          </Link>
         </div>
 
         {/* Hamburger */}
@@ -101,6 +129,51 @@ export default function Navbar() {
           .hamburger { display: flex !important; }
         }
       `}</style>
+
+      {menuOpen && (
+        <nav
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            background: "#ffffff",
+            borderTop: "1px solid var(--border)",
+            boxShadow: "0 14px 30px rgba(0,0,0,0.08)",
+            padding: "16px 24px 22px",
+            display: "grid",
+            gap: 4,
+          }}
+        >
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  color: active ? "var(--primary)" : "var(--secondary)",
+                  textDecoration: "none",
+                  fontWeight: 700,
+                  padding: "12px 0",
+                  borderBottom: "1px solid #f1f5f9",
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <Link
+            href="/contact#booking"
+            onClick={() => setMenuOpen(false)}
+            className="btn-primary"
+            style={{ marginTop: 12, width: "100%" }}
+          >
+            Book Now
+          </Link>
+        </nav>
+      )}
     </header>
   );
 }
