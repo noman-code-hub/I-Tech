@@ -8,6 +8,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/our-work" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -86,7 +87,7 @@ export default function Navbar() {
 
           {/* Book Now CTA */}
           <Link
-            href="/contact#booking"
+            href="/contact#contact"
             style={{
               background: "linear-gradient(135deg, #ff6b35, #e64a19)",
               color: "#fff",
@@ -165,7 +166,7 @@ export default function Navbar() {
             );
           })}
           <Link
-            href="/contact#booking"
+            href="/contact#contact"
             onClick={() => setMenuOpen(false)}
             className="btn-primary"
             style={{ marginTop: 12, width: "100%" }}

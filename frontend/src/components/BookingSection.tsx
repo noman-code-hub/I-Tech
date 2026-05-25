@@ -54,6 +54,8 @@ export default function BookingSection() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [submittedEmail, setSubmittedEmail] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [emailSent, setEmailSent] = useState(true);
 
   const handle = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -64,7 +66,7 @@ export default function BookingSection() {
     setStatus("loading");
     setErrorMsg("");
 
-    const result = await postJson<{ success: boolean; message: string; bookingId: string }>(
+    const result = await postJson<{ success: boolean; message: string; bookingId: string; emailSent?: boolean }>(
       "/api/booking",
       form
     );
@@ -76,6 +78,8 @@ export default function BookingSection() {
     }
 
     setSubmittedEmail(form.email);
+    setSuccessMessage(result.data.message);
+    setEmailSent(result.data.emailSent !== false);
     setStatus("success");
     setForm(EMPTY);
   };
@@ -138,7 +142,12 @@ export default function BookingSection() {
         {/* Main Card */}
         <div style={{ maxWidth: 820, margin: "0 auto" }}>
           {status === "success" ? (
-            <SuccessCard onReset={() => setStatus("idle")} email={submittedEmail} />
+            <SuccessCard
+              onReset={() => setStatus("idle")}
+              email={submittedEmail}
+              emailSent={emailSent}
+              message={successMessage}
+            />
           ) : (
             <div style={{
               background: "rgba(255,255,255,0.05)",
@@ -321,7 +330,17 @@ function FormField({ label, children }: { label: string; children: React.ReactNo
   );
 }
 
-function SuccessCard({ onReset, email }: { onReset: () => void; email: string }) {
+function SuccessCard({
+  onReset,
+  email,
+  emailSent,
+  message,
+}: {
+  onReset: () => void;
+  email: string;
+  emailSent: boolean;
+  message: string;
+}) {
   return (
     <div style={{
       background: "rgba(255,255,255,0.05)",
@@ -334,8 +353,14 @@ function SuccessCard({ onReset, email }: { onReset: () => void; email: string })
         Booking Confirmed!
       </h3>
       <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1rem", lineHeight: 1.7, margin: "0 0 12px" }}>
-        We&apos;ve sent a confirmation email to{" "}
-        <strong style={{ color: "#ffcc80" }}>{email}</strong>.
+        {emailSent ? (
+          <>
+            We&apos;ve sent a confirmation email to{" "}
+            <strong style={{ color: "#ffcc80" }}>{email}</strong>.
+          </>
+        ) : (
+          message || "Your booking was received, but email confirmation could not be sent."
+        )}
       </p>
       <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.9rem", margin: "0 0 36px" }}>
         Our team will be in touch within 24 hours to finalize your appointment.

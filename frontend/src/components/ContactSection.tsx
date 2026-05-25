@@ -18,6 +18,7 @@ export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", service: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handle = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
@@ -27,7 +28,7 @@ export default function ContactSection() {
     setStatus("loading");
     setErrorMsg("");
 
-    const result = await postJson<{ success: boolean; message: string; leadId: string }>(
+    const result = await postJson<{ success: boolean; message: string; leadId: string; emailSent?: boolean }>(
       "/api/contact",
       form
     );
@@ -38,6 +39,7 @@ export default function ContactSection() {
       return;
     }
 
+    setSuccessMessage(result.data.message);
     setStatus("success");
     setForm({ name: "", email: "", phone: "", service: "", message: "" });
   };
@@ -68,7 +70,7 @@ export default function ContactSection() {
             {status === "success" ? (
               <div style={{ padding: "30px", background: "#f0fdf4", color: "#166534", borderRadius: 8, border: "1px solid #bbf7d0" }}>
                 <h3 style={{ fontSize: "1.2rem", marginBottom: 8 }}>Message Sent Successfully!</h3>
-                <p>Thank you for reaching out. We will contact you soon.</p>
+                <p>{successMessage || "Thank you for reaching out. We will contact you soon."}</p>
                 <button onClick={() => setStatus("idle")} className="btn-primary" style={{ marginTop: 20 }}>Send Another</button>
               </div>
             ) : (

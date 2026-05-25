@@ -22,6 +22,12 @@ yarn-debug.log*
 yarn-error.log*
 *.log
 
+# Local fallback submissions
+backend/data/
+
+# User uploads
+backend/uploads/
+
 # OS files
 .DS_Store
 Thumbs.db
