@@ -37,8 +37,8 @@ export default function AboutPage() {
         overflow: "hidden" 
       }}>
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <div className="section-tag" style={{ color: "var(--primary)" }}>Our Story</div>
-          <h1 className="section-title" style={{ color: "#fff" }}>About <span style={{ color: "var(--primary)" }}>i-TECH Digitals</span></h1>
+          <div className="section-tag" style={{ color: "#fff" }}>Our Story</div>
+          <h1 className="section-title" style={{ color: "#fff" }}>About <span style={{ color: "#fff" }}>i-TECH Digitals</span></h1>
           <p className="section-subtitle" style={{ margin: "0 auto", color: "#e5e7eb" }}>
             We are a passionate team of designers, developers, and storytellers — united by a love for creating exceptional digital experiences.
           </p>
@@ -75,7 +75,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="section-py" style={{ background: "linear-gradient(135deg,#fff1ed 0%,#f8f9fa 100%)" }}>
+      <section className="section-py" style={{ background: "linear-gradient(135deg,#f3f0fa 0%,#f8f9fa 100%)" }}>
         <div className="container">
           <div style={{ textAlign: "center", marginBottom: 56 }}>
             <div className="section-tag">Our Journey</div>
@@ -91,7 +91,7 @@ export default function AboutPage() {
                     <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", lineHeight: 1.7 }}>{m.event}</p>
                   </div>
                 </div>
-                <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: 16, height: 16, background: "var(--gradient-primary)", borderRadius: "50%", border: "3px solid #fff", boxShadow: "0 0 0 3px rgba(255,87,34,0.2)", zIndex: 1 }} />
+                <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: 16, height: 16, background: "var(--gradient-primary)", borderRadius: "50%", border: "3px solid #fff", boxShadow: "0 0 0 3px rgba(101,80,161,0.2)", zIndex: 1 }} />
                 <div style={{ flex: 1 }} />
               </div>
             ))}
@@ -110,7 +110,7 @@ export default function AboutPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 32, maxWidth: 1000, margin: "0 auto" }}>
             {team.map(m => (
               <div key={m.name} className="card" style={{ padding: "32px 24px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <div style={{ width: 80, height: 80, background: "linear-gradient(145deg,#fff1ed,#ffe0d2)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>{m.icon}</div>
+                <div style={{ width: 80, height: 80, background: "linear-gradient(145deg,#f3f0fa,#e9e4f5)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>{m.icon}</div>
                 <h3 style={{ fontFamily: "'Baskervville',serif", fontSize: "1.1rem", color: "var(--text-dark)", marginBottom: 4 }}>{m.name}</h3>
                 <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>{m.role}</p>
               </div>

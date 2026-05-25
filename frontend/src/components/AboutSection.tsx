@@ -5,20 +5,20 @@ export default function AboutSection() {
   return (
     <section id="about" className="section-py" style={{ background: "var(--bg)" }}>
       <div className="container">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+        <div className="about-grid">
 
           {/* Left - Visual */}
           <div style={{ position: "relative" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "center" }}>
+            <div className="about-images-grid">
               {/* Image 1 */}
-              <div style={{ borderRadius: 24, height: 350, overflow: "hidden", position: "relative", boxShadow: "var(--shadow-lg)" }}>
+              <div className="about-img-1" style={{ borderRadius: 24, overflow: "hidden", position: "relative", boxShadow: "var(--shadow-lg)" }}>
                 <img src="/images/about1.png" alt="Team Collaboration" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", bottom: 0, right: 0, background: "var(--primary)", width: "80%", padding: "16px", borderTopLeftRadius: 24, color: "#fff", fontWeight: 700, zIndex: 2 }}>
                   8+ Years Exp.
                 </div>
               </div>
               {/* Image 2 */}
-              <div style={{ borderRadius: 24, height: 450, marginTop: -40, overflow: "hidden", boxShadow: "var(--shadow-lg)" }}>
+              <div className="about-img-2" style={{ borderRadius: 24, overflow: "hidden", boxShadow: "var(--shadow-lg)" }}>
                 <img src="/images/about2.png" alt="IT Professional" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
             </div>
@@ -43,7 +43,7 @@ export default function AboutSection() {
                 { title: "Precision", desc: "Meticulous attention to quality and pixel-perfect work." }
               ].map((item, idx) => (
                 <div key={idx} style={{ display: "flex", gap: 16 }}>
-                  <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(255,87,34,0.1)", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 4 }}>
+                  <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(101,80,161,0.1)", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 4 }}>
                     <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </div>
                   <div>

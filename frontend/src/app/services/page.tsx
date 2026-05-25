@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const serviceDetails = [
   {
-    num: "01", title: "Web & App Development", color: "#ff5722",
+    num: "01", title: "Web & App Development", color: "#6550A1",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
     description: "We craft high-performance websites and mobile applications tailored to your business goals. From landing pages to complex enterprise platforms, we deliver pixel-perfect, scalable solutions using the latest technologies.",
     features: ["Custom Website Design & Development", "Mobile App Development (iOS & Android)", "E-Commerce Platforms", "CMS Integration", "API Development & Integration", "Performance Optimization & SEO"],
@@ -21,7 +21,7 @@ const serviceDetails = [
     features: ["Commercial Space Design", "Office & Retail Design", "3D Visualization & Rendering", "Space Planning", "Material & Furniture Selection", "Project Management"],
   },
   {
-    num: "03", title: "Animations", color: "#ff5722",
+    num: "03", title: "Animations", color: "#6550A1",
     image: "https://images.unsplash.com/photo-1636622433525-127afdf3662d?w=800&q=80",
     description: "From explainer videos to full brand motion campaigns, our animation team produces visually stunning 2D and 3D animations that engage your audience and communicate your message powerfully.",
     features: ["2D & 3D Animation", "Motion Graphics", "Explainer Videos", "Product Animations", "Logo Animations", "Social Media Reels & Stories"],
@@ -33,7 +33,7 @@ const serviceDetails = [
     features: ["Content Strategy & Planning", "Graphic Design & Copywriting", "Community Management", "Paid Advertising Campaigns", "Analytics & Reporting", "Influencer Collaboration"],
   },
   {
-    num: "05", title: "Photography & Videography", color: "#ff5722",
+    num: "05", title: "Photography & Videography", color: "#6550A1",
     image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
     description: "Our professional visual team captures your brand story through stunning photography and cinematic videography. We handle everything from product shoots to full corporate video productions.",
     features: ["Product & Commercial Photography", "Brand Storytelling Videos", "Event Coverage", "Corporate Headshots", "Real Estate Photography", "Drone Aerial Footage"],
@@ -45,7 +45,7 @@ const serviceDetails = [
     features: ["Business Cards & Stationery", "Brochures & Flyers", "Banners & Signage", "Packaging Design & Print", "Branded Merchandise", "Large Format Printing"],
   },
   {
-    num: "07", title: "Branding", color: "#ff5722",
+    num: "07", title: "Branding", color: "#6550A1",
     image: "https://images.unsplash.com/photo-1493421419110-74f4e85ba126?w=800&q=80",
     description: "We build complete brand identities from scratch — logo design, color systems, typography, and comprehensive brand guidelines — ensuring your brand communicates the right message at every touchpoint.",
     features: ["Logo Design & Identity", "Brand Strategy & Positioning", "Brand Guidelines Manual", "Marketing Collateral Design", "Brand Refresh & Rebranding", "Packaging & Label Design"],
@@ -74,16 +74,16 @@ export default function ServicesPage() {
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <div style={{ 
             display: "inline-block", 
-            border: "1px solid rgba(255,87,34,0.3)", 
+            border: "1px solid rgba(255,255,255,0.2)", 
             borderRadius: 50, 
             padding: "6px 20px",
             marginBottom: 20 
           }}>
-            <span style={{ color: "var(--primary)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+            <span style={{ color: "#fff", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>
               — What We Offer
             </span>
           </div>
-          <h1 className="section-title" style={{ color: "#fff" }}>Our <span style={{ color: "var(--primary)" }}>Services</span></h1>
+          <h1 className="section-title" style={{ color: "#fff" }}>Our <span style={{ color: "#fff" }}>Services</span></h1>
           <p className="section-subtitle" style={{ margin: "0 auto", color: "#e5e7eb" }}>
             End-to-end digital and creative services — from strategy to execution — all under one roof.
           </p>
@@ -96,12 +96,9 @@ export default function ServicesPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
             {serviceDetails.map((s, i) => (
               <div key={s.num}
+                className="services-page-card"
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: 0,
-                  alignItems: "center",
-                  background: i % 2 === 0 ? "#fff" : "linear-gradient(135deg,#fff1ed 0%,#f8f9fa 100%)",
+                  background: i % 2 === 0 ? "#fff" : "linear-gradient(135deg,#f3f0fa 0%,#f8f9fa 100%)",
                   borderRadius: 20,
                   border: "1px solid var(--border)",
                   boxShadow: "var(--shadow-sm)",
@@ -110,7 +107,7 @@ export default function ServicesPage() {
               >
                 {/* Visual (order flips on even/odd) */}
                 {i % 2 !== 0 && (
-                  <div style={{ order: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+                  <div className="services-page-card-visual" style={{ order: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
                     <div style={{ width: "100%", aspectRatio: "16/9", borderRadius: 14, overflow: "hidden", boxShadow: `0 8px 24px ${s.color}25` }}>
                       <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                     </div>
@@ -118,11 +115,11 @@ export default function ServicesPage() {
                 )}
 
                 {/* Content */}
-                <div style={{ order: i % 2 !== 0 ? 2 : undefined, padding: "36px 40px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div className="services-page-card-content" style={{ order: i % 2 !== 0 ? 2 : undefined, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                   <div style={{ fontSize: "0.72rem", fontWeight: 700, color: s.color, letterSpacing: "0.1em", marginBottom: 6 }}>{s.num}</div>
                   <h2 style={{ fontFamily: "'Baskervville',serif", fontSize: "1.7rem", color: "var(--text-dark)", marginBottom: 14 }}>{s.title}</h2>
                   <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", lineHeight: 1.8, marginBottom: 20 }}>{s.description}</p>
-                  <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "7px 14px", listStyle: "none", marginBottom: 24 }}>
+                  <ul className="services-page-card-features" style={{ listStyle: "none", marginBottom: 24, padding: 0 }}>
                     {s.features.map(f => (
                       <li key={f} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.82rem", color: "var(--text-dark)" }}>
                         <span style={{ width: 16, height: 16, background: `${s.color}20`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -139,7 +136,7 @@ export default function ServicesPage() {
                 </div>
 
                 {i % 2 === 0 && (
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+                  <div className="services-page-card-visual" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
                     <div style={{ width: "100%", aspectRatio: "16/9", borderRadius: 14, overflow: "hidden", boxShadow: `0 8px 24px ${s.color}25` }}>
                       <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                     </div>

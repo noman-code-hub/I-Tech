@@ -55,7 +55,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className="section-py" style={{ background: "#ffffff" }}>
       <div className="container">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+        <div className="about-grid">
           
           {/* Left Form */}
           <div>
@@ -80,7 +80,7 @@ export default function ContactSection() {
                     {errorMsg || "Something went wrong. Please try again."}
                   </div>
                 )}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                <div className="form-row">
                   <input name="name" type="text" placeholder="Your Name" required value={form.name} onChange={handle} style={inputStyle} />
                   <input name="email" type="email" placeholder="Your Email" required value={form.email} onChange={handle} style={inputStyle} />
                 </div>
@@ -103,7 +103,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right Image */}
-          <div style={{ borderRadius: 24, height: 500, position: "relative", overflow: "hidden", boxShadow: "var(--shadow-lg)" }}>
+          <div className="contact-image-container">
              <img src="/images/about1.png" alt="Contact Us" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
              {/* Small accent circle */}
              <div style={{ position: "absolute", top: 30, left: 30, width: 60, height: 60, background: "var(--secondary)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)", boxShadow: "var(--shadow-lg)" }}>

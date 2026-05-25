@@ -34,21 +34,21 @@ export default function TestimonialsSection() {
         <div style={{ textAlign: "center", marginBottom: 60 }}>
           <div style={{ 
             display: "inline-block", 
-            border: "1px solid rgba(255,87,34,0.3)", 
+            border: "1px solid rgba(255,255,255,0.2)", 
             borderRadius: 50, 
             padding: "6px 20px",
             marginBottom: 20 
           }}>
-            <span style={{ color: "var(--primary)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em" }}>
+            <span style={{ color: "#fff", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em" }}>
               — TESTIMONIALS
             </span>
           </div>
           <h2 style={{ color: "#fff", fontSize: "clamp(2rem, 4vw, 2.5rem)", fontWeight: 700 }}>
-            What Our Customer <span style={{ color: "var(--primary)" }}>Says</span>
+            What Our Customer <span style={{ color: "#fff" }}>Says</span>
           </h2>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 30, maxWidth: 1050, margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 30, maxWidth: 1050, margin: "0 auto" }}>
           {testimonials.map((t, i) => (
             <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               
@@ -66,7 +66,7 @@ export default function TestimonialsSection() {
                 boxShadow: "0 10px 40px rgba(0,0,0,0.4)"
               }}>
                 {/* Outline Quote Icon */}
-                <div style={{ color: "var(--primary)", marginBottom: 24 }}>
+                <div style={{ color: "rgba(255,255,255,0.4)", marginBottom: 24 }}>
                   <svg width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10 11h-4a3 3 0 0 1-3-3v-3a3 3 0 0 1 3-3h4l-2 9zm11 0h-4a3 3 0 0 1-3-3v-3a3 3 0 0 1 3-3h4l-2 9z" />
                   </svg>
@@ -86,7 +86,7 @@ export default function TestimonialsSection() {
                 {/* Name & Role */}
                 <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "center" }}>
                   <h4 style={{ color: "#fff", fontSize: "0.95rem", margin: 0, fontWeight: 600 }}>{t.name}</h4>
-                  <span style={{ color: "var(--primary)", fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase" }}>{t.company}</span>
+                  <span style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase" }}>{t.company}</span>
                 </div>
               </div>
 
@@ -99,7 +99,7 @@ export default function TestimonialsSection() {
                   left: 0, 
                   right: 0, 
                   height: 1, 
-                  background: "linear-gradient(90deg, transparent, rgba(255,87,34,0.4) 30%, rgba(255,87,34,0.4) 70%, transparent)" 
+                  background: "linear-gradient(90deg, transparent, rgba(101,80,161,0.4) 30%, rgba(101,80,161,0.4) 70%, transparent)" 
                 }} />
                 
                 {/* Avatar cutting through the line */}

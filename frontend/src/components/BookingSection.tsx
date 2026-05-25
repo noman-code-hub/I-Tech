@@ -97,12 +97,12 @@ export default function BookingSection() {
       {/* Background blobs */}
       <div style={{
         position: "absolute", top: -100, right: -100, width: 400, height: 400,
-        background: "radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(101,80,161,0.15) 0%, transparent 70%)",
         borderRadius: "50%", pointerEvents: "none",
       }} />
       <div style={{
         position: "absolute", bottom: -80, left: -80, width: 350, height: 350,
-        background: "radial-gradient(circle, rgba(255,107,53,0.10) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(101,80,161,0.10) 0%, transparent 70%)",
         borderRadius: "50%", pointerEvents: "none",
       }} />
 
@@ -111,10 +111,10 @@ export default function BookingSection() {
         {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: 60 }}>
           <div style={{
-            display: "inline-block", background: "rgba(255,107,53,0.15)",
-            border: "1px solid rgba(255,107,53,0.4)", borderRadius: 50,
+            display: "inline-block", background: "rgba(101,80,161,0.15)",
+            border: "1px solid rgba(101,80,161,0.4)", borderRadius: 50,
             padding: "6px 18px", fontSize: "0.8rem", fontWeight: 600,
-            color: "#ff6b35", letterSpacing: "1.5px", textTransform: "uppercase",
+            color: "#8f7cce", letterSpacing: "1.5px", textTransform: "uppercase",
             marginBottom: 20,
           }}>
             Book a Consultation
@@ -125,7 +125,7 @@ export default function BookingSection() {
           }}>
             Schedule Your Free{" "}
             <span style={{
-              background: "linear-gradient(90deg, #ff6b35, #ffcc80)",
+              background: "linear-gradient(90deg, #8f7cce, #d2c6ff)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
             }}>
               Discovery Call
@@ -169,8 +169,8 @@ export default function BookingSection() {
 
               <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 22 }}>
 
-                {/* Row 1 — Name & Email */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
+                 {/* Row 1 — Name & Email */}
+                <div className="form-row">
                   <FormField label="Full Name *">
                     <input
                       name="name" type="text" placeholder="John Doe"
@@ -188,7 +188,7 @@ export default function BookingSection() {
                 </div>
 
                 {/* Row 2 — Phone & Service */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
+                <div className="form-row">
                   <FormField label="Phone Number">
                     <input
                       name="phone" type="tel" placeholder="+965 XXXX XXXX"
@@ -210,7 +210,7 @@ export default function BookingSection() {
                 </div>
 
                 {/* Row 3 — Date & Time */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
+                <div className="form-row">
                   <FormField label="Preferred Date *">
                     <input
                       name="preferredDate" type="date"
@@ -260,13 +260,13 @@ export default function BookingSection() {
                     disabled={status === "loading"}
                     style={{
                       background: status === "loading"
-                        ? "rgba(255,107,53,0.5)"
-                        : "linear-gradient(135deg, #ff6b35, #e64a19)",
+                        ? "rgba(101,80,161,0.5)"
+                        : "linear-gradient(135deg, #6550A1, #543f8e)",
                       color: "#fff", border: "none", padding: "16px 40px",
                       borderRadius: 50, fontSize: "1rem", fontWeight: 700,
                       cursor: status === "loading" ? "not-allowed" : "pointer",
                       display: "flex", alignItems: "center", gap: 10,
-                      boxShadow: status === "loading" ? "none" : "0 8px 30px rgba(255,107,53,0.4)",
+                      boxShadow: status === "loading" ? "none" : "0 8px 30px rgba(101,80,161,0.4)",
                       transition: "all 0.3s ease",
                       fontFamily: "inherit",
                     }}
@@ -356,7 +356,7 @@ function SuccessCard({
         {emailSent ? (
           <>
             We&apos;ve sent a confirmation email to{" "}
-            <strong style={{ color: "#ffcc80" }}>{email}</strong>.
+            <strong style={{ color: "#d2c6ff" }}>{email}</strong>.
           </>
         ) : (
           message || "Your booking was received, but email confirmation could not be sent."
@@ -368,11 +368,11 @@ function SuccessCard({
       <button
         onClick={onReset}
         style={{
-          background: "linear-gradient(135deg, #ff6b35, #e64a19)",
+          background: "linear-gradient(135deg, #6550A1, #543f8e)",
           color: "#fff", border: "none", padding: "14px 36px",
           borderRadius: 50, fontSize: "0.95rem", fontWeight: 700,
           cursor: "pointer", fontFamily: "inherit",
-          boxShadow: "0 8px 30px rgba(255,107,53,0.4)",
+          boxShadow: "0 8px 30px rgba(101,80,161,0.4)",
         }}
       >
         Book Another Consultation

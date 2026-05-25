@@ -6,8 +6,8 @@ export default function Footer() {
     <footer>
       {/* Orange Top Band CTA */}
       <div style={{ background: "var(--primary)", padding: "40px 0" }}>
-        <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div className="container footer-cta">
+          <div className="footer-cta-info">
             <div style={{ width: 48, height: 48, background: "rgba(255,255,255,0.2)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>
               <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
             </div>
@@ -30,7 +30,7 @@ export default function Footer() {
             {/* Brand Info */}
             <div>
               <div style={{ display: "flex", alignItems: "center", marginBottom: 20 }}>
-                <img src="/images/Logo.png" alt="i-TECH Digitals" style={{ height: 40, objectFit: "contain", transform: "scale(2.5)", transformOrigin: "left center", filter: "brightness(0) invert(1)" }} />
+                <img src="/images/Logo.png" alt="i-TECH Digitals" style={{ height: 40, objectFit: "contain", transform: "scale(var(--logo-scale))", transformOrigin: "left center", filter: "brightness(0) invert(1)" }} />
               </div>
               <p style={{ fontSize: "0.95rem", lineHeight: 1.7, marginBottom: 24 }}>
                 Envision. Execute. Elevate. Pioneering design excellence and transforming your vision into captivating reality across Kuwait and Pakistan.
@@ -58,7 +58,7 @@ export default function Footer() {
                 {["Web Development", "App Development", "Branding & Identity", "Digital Marketing", "Photography", "Animations"].map(item => (
                   <li key={item}>
                     <Link href="/services" style={{ color: "#9ca3af", textDecoration: "none", fontSize: "0.95rem", display: "flex", alignItems: "center", gap: 8 }}>
-                      <span style={{ color: "var(--primary)" }}>›</span> {item}
+                      <span style={{ color: "rgba(255,255,255,0.6)" }}>›</span> {item}
                     </Link>
                   </li>
                 ))}
@@ -72,7 +72,7 @@ export default function Footer() {
                 {[["About Us", "/about"], ["Our Work", "/our-work"], ["Contact Us", "/contact"], ["Privacy Policy", "/"], ["Terms & Conditions", "/"]].map(([label, href]) => (
                   <li key={label}>
                     <Link href={href} style={{ color: "#9ca3af", textDecoration: "none", fontSize: "0.95rem", display: "flex", alignItems: "center", gap: 8 }}>
-                      <span style={{ color: "var(--primary)" }}>›</span> {label}
+                      <span style={{ color: "rgba(255,255,255,0.6)" }}>›</span> {label}
                     </Link>
                   </li>
                 ))}
@@ -84,21 +84,21 @@ export default function Footer() {
               <h4 style={{ color: "#fff", fontSize: "1.2rem", marginBottom: 20 }}>Contact Info</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 <div style={{ display: "flex", gap: 12 }}>
-                  <div style={{ color: "var(--primary)", marginTop: 4 }}>📍</div>
+                  <div style={{ color: "rgba(255,255,255,0.7)", marginTop: 4 }}>📍</div>
                   <div>
                     <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.95rem", marginBottom: 4 }}>Kuwait Office</div>
                     <div style={{ fontSize: "0.9rem" }}>Zawya Complex, Hawally</div>
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: 12 }}>
-                  <div style={{ color: "var(--primary)", marginTop: 4 }}>📍</div>
+                  <div style={{ color: "rgba(255,255,255,0.7)", marginTop: 4 }}>📍</div>
                   <div>
                     <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.95rem", marginBottom: 4 }}>Pakistan Office</div>
                     <div style={{ fontSize: "0.9rem" }}>E-11/3, Islamabad</div>
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: 12 }}>
-                  <div style={{ color: "var(--primary)", marginTop: 4 }}>✉️</div>
+                  <div style={{ color: "rgba(255,255,255,0.7)", marginTop: 4 }}>✉️</div>
                   <div>
                     <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.95rem", marginBottom: 4 }}>Email Us</div>
                     <div style={{ fontSize: "0.9rem" }}>itechkw.business@gmail.com</div>

@@ -2,10 +2,12 @@
 import Link from "next/link";
 
 const projects = [
-  { title: "Alnouri Group", cat: "Social Media", img: "/images/port1.png" },
-  { title: "Afreya Website", cat: "Web Development", img: "/images/port2.png" },
-  { title: "Qirdala Jewelry", cat: "Videography", img: "/images/port3.png" },
-  { title: "Out Of Blue", cat: "Branding", img: "/images/port2.png" }, // Reusing port2.png as fallback
+  { title: "Alnouri Group", cat: "Social Media", img: "/images/portfolio/Alnouri Group Social Media Management.png" },
+  { title: "Afreya Website", cat: "Web Development", img: "/images/portfolio/Afreya Website Development.png" },
+  { title: "Mandarin Gourmet", cat: "Social Media", img: "/images/portfolio/Mandarin Gourmet Social Media Management.png" },
+  { title: "Carly Vehicle Rental App", cat: "App Development", img: "/images/portfolio/Carly Vehicle Rental App Development.png" },
+  { title: "Ambrose Abayas", cat: "Photography", img: "/images/portfolio/Ambrose Abayas Photography.png" },
+  { title: "JWood Branding", cat: "Branding", img: "/images/portfolio/JWood Branding.png" },
 ];
 
 export default function PortfolioSection() {
@@ -15,9 +17,9 @@ export default function PortfolioSection() {
         <div className="container">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 60, flexWrap: "wrap", gap: 20 }}>
             <div>
-              <div className="section-tag" style={{ color: "var(--primary)" }}>Our Portfolio</div>
+              <div className="section-tag" style={{ color: "#fff" }}>Our Portfolio</div>
               <h2 className="section-title" style={{ color: "#fff", margin: 0 }}>
-                Explore Our Recent <span>Projects</span>
+                Explore Our Recent <span style={{ color: "#fff" }}>Projects</span>
               </h2>
             </div>
             <Link href="/our-work" className="btn-primary">
@@ -25,7 +27,7 @@ export default function PortfolioSection() {
             </Link>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 30 }}>
+          <div className="portfolio-grid">
             {projects.map((p, i) => (
               <div key={i} style={{ 
                 borderRadius: 16, 
@@ -56,7 +58,7 @@ export default function PortfolioSection() {
                 {/* Info Box */}
                 <div style={{ padding: "28px 20px", textAlign: "center" }}>
                   <h3 style={{ color: "#fff", fontSize: "1.2rem", fontWeight: 700, letterSpacing: "0.02em", marginBottom: 10 }}>{p.title}</h3>
-                  <div style={{ color: "var(--primary)", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  <div style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
                     {p.cat}
                   </div>
                 </div>

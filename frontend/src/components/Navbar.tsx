@@ -42,7 +42,7 @@ export default function Navbar() {
       <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         {/* Logo */}
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
-          <img src="/images/Logo.png" alt="i-TECH Digitals" style={{ height: 40, objectFit: "contain", transform: "scale(2.5)", transformOrigin: "left center", filter: isDarkBg ? "brightness(0) invert(1)" : "none", transition: "all 0.3s ease" }} />
+          <img src="/images/Logo.png" alt="i-TECH Digitals" style={{ height: 40, objectFit: "contain", transform: "scale(var(--logo-scale))", transformOrigin: "left center", filter: isDarkBg ? "brightness(0) invert(1)" : "none", transition: "all 0.3s ease" }} />
         </Link>
 
         {/* Desktop Nav */}
@@ -75,21 +75,15 @@ export default function Navbar() {
 
         {/* Right CTA & Info */}
         <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,87,34,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)" }}>
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" /></svg>
-            </div>
-            <div>
-              <div style={{ fontSize: "0.75rem", color: isDarkBg ? "#94a3b8" : "var(--text-muted)", fontWeight: 500 }}>Call Anytime</div>
-              <div style={{ fontSize: "0.9rem", fontWeight: 700, color: isDarkBg ? "#fff" : "var(--secondary)" }}>+965 9090 9075</div>
-            </div>
+          <div>
+            <div style={{ fontSize: "0.9rem", fontWeight: 700, color: isDarkBg ? "#e2e8f0" : "var(--text-dark)" }}>+965 9090 9075</div>
           </div>
 
           {/* Book Now CTA */}
           <Link
             href="/contact#contact"
             style={{
-              background: "linear-gradient(135deg, #ff6b35, #e64a19)",
+              background: "linear-gradient(135deg, #6550A1, #543f8e)",
               color: "#fff",
               padding: "10px 22px",
               borderRadius: 50,
@@ -99,37 +93,31 @@ export default function Navbar() {
               display: "flex",
               alignItems: "center",
               gap: 7,
-              boxShadow: "0 4px 18px rgba(255,107,53,0.35)",
+              boxShadow: "0 4px 18px rgba(101,80,161,0.35)",
               transition: "all 0.25s ease",
               whiteSpace: "nowrap",
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 24px rgba(255,107,53,0.5)";
+              (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 24px rgba(101,80,161,0.5)";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 18px rgba(255,107,53,0.35)";
+              (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 18px rgba(101,80,161,0.35)";
             }}
           >
-            📅 Book Now
+            Book Now
           </Link>
         </div>
 
         {/* Hamburger */}
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", cursor: "pointer", display: "none", flexDirection: "column", gap: 5 }}>
+        <button className={`hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", cursor: "pointer", display: "none", flexDirection: "column", gap: 5 }}>
           {[0, 1, 2].map(i => (
             <span key={i} style={{ display: "block", width: 24, height: 2, background: isDarkBg ? "#fff" : "var(--secondary)", transition: "all 0.3s" }} />
           ))}
         </button>
       </div>
 
-      <style jsx>{`
-        @media (max-width: 992px) {
-          .desktop-nav { display: none !important; }
-          .hamburger { display: flex !important; }
-        }
-      `}</style>
 
       {menuOpen && (
         <nav
